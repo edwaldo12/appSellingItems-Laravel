@@ -23,10 +23,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'admin',
-            'username' => 'admin',
-            'nik' => '110110',
-            'password' => bcrypt("admin") // password
+            'nama' => 'Admin',
+            'telepon' => '0855886644',
+            'email' => 'makanbakcang@gmail.com',
+            'tipe_pengguna' => 'Super_Admin', // password
+            'username' => 'Admin',
+            'password' => '$2a$12$p4rNuvf5.mpF8PxOvZezQ.ebhxJ526J9nbw/HPG2wmNBV880PaeQC',
         ];
     }
 

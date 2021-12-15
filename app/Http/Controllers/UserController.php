@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -16,8 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('user.index', compact('users'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        //
     }
 
     /**
@@ -38,31 +35,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => "required",
-            "username" => ["required", "unique:users"],
-            "nik" => ["required", "unique:users"],
-            "password" => ["required", 'min:8'],
-            "status" => "required"
-        ]);
-
-        $user = new User;
-        $user->name = $request->name;
-        $user->nik = $request->nik;
-        $user->username = $request->username;
-        $user->status = $request->status;
-        $user->password = Hash::make($request->password);
-        Session::flash('save_user', $user->save());
-        return redirect()->route('users.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -70,52 +52,34 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-        return view('user.edit', compact('user'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $request->validate([
-            'name' => "required",
-            "username" => ["required", "unique:users"],
-            "nik" => ["required", "unique:users"],
-            "password" => ["required", 'min:8'],
-            "status" => "required"
-        ]);
-
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->nik = $request->nik;
-        $user->username = $request->username;
-        $user->status = $request->status;
-        $user->password = Hash::make($request->password);
-        Session::flash('update_user', $user->save());
-        return redirect()->route('users.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-        Session::flash('delete_user', $user->delete());
-        return redirect()->route('users.index');
+        //
     }
 }
