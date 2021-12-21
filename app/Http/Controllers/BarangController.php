@@ -24,7 +24,6 @@ class BarangController extends Controller
     {
         $request->validate([
             'nama' => "required",
-            'satuan' => "required",
             'harga_beli' => "required",
             'harga_jual' => "required",
             'stok' => "required",
@@ -57,7 +56,6 @@ class BarangController extends Controller
         $barang = Barang::findOrFail($id);
         $rules = [
             'nama' => "required",
-            'satuan' => "required",
             'harga_beli' => "required",
             'harga_jual' => "required",
             'stok' => "required",

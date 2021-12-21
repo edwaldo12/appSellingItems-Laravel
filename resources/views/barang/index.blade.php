@@ -46,7 +46,12 @@
                                     @foreach ($barang as $barang)
                                         <tr>
                                             <td>{{ $barang->nama }}</td>
-                                            <td>{{ $barang->satuan }}</td>
+                                            <td>
+                                                @if ($barang->satuan == null)Kosong
+                                                @else
+                                                    {{ $barang->satuan }}
+                                                @endif
+                                            </td>
                                             <td>Rp. {{ number_format($barang->harga_beli) }}</td>
                                             <td>Rp. {{ number_format($barang->harga_jual) }}</td>
                                             <td>{{ $barang->stok }}</td>

@@ -44,7 +44,7 @@
                                             <label for="harga_jual">Harga Jual</label>
                                             <input type="number" id="harga_jual" name="harga_jual"
                                                 class="form-control {{ $errors->has('harga_jual') ? 'is-invalid' : '' }}"
-                                                placeholder="Masukkan Harga Jual" value="{{ old('harga_jual') }}">
+                                                placeholder="Masukkan Harga Jual" value="{{ old('harga_jual') }}" min="1">
                                             <small class="text-danger">{{ $errors->first('harga_jual') }}</small>
                                         </div>
                                     </div>
@@ -60,7 +60,8 @@
                                             <label for="harga_beli">Harga Beli</label>
                                             <input type="number" id="harga_beli" name="harga_beli"
                                                 class="form-control {{ $errors->has('harga_beli') ? 'is-invalid' : '' }}"
-                                                placeholder="Masukkan Harga Beli" value="{{ old('harga_beli') }}">
+                                                placeholder="Masukkan Harga Beli" value="{{ old('harga_beli') }}"
+                                                min="1">
                                             <small class="text-danger">{{ $errors->first('harga_beli') }}</small>
                                         </div>
                                     </div>
