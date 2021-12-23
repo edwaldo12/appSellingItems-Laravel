@@ -11,6 +11,7 @@ class Pembelian extends Model
     protected $table = 'pembelian';
     protected $appends = ['total'];
 
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, "id_supplier", "id");
@@ -28,9 +29,8 @@ class Pembelian extends Model
 
     public function getTotalAttribute()
     {
-        $detail_pembelian = $this->with(['detail_pembelian.barang'])->find($this->id)->detail_pembelian;
-        return $detail_pembelian->reduce(function ($a, $b) {
-            return $a + ($b['jumlah'] * $b['barang']['harga']);
+        return $this->detail_pembelian->reduce(function ($a, $b) {
+            return $a + $b->sub_total;
         }, 0);
     }
 }

@@ -26,9 +26,8 @@ class Penjualan extends Model
     }
     public function getTotalAttribute()
     {
-        $detail_penjualan = $this->with(['detail_penjualan.barang'])->find($this->id)->detail_penjualan;
-        return $detail_penjualan->reduce(function ($a, $b) {
-            return $a + ($b['jumlah'] * $b['barang']['harga']);
+        return $this->detail_penjualan->reduce(function ($a, $b) {
+            return $a + $b->sub_total;
         }, 0);
     }
 }
