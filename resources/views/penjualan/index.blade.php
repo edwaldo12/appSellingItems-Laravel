@@ -19,15 +19,29 @@
                         <div class="box-header">
                             <h4 class="box-title">Data Penjualan</h4>
                         </div>
-                        {{-- <div class="box-header">
-                            <button type="button" class="btn btn-success">
-                                <a href="{{ route('penjualan.create') }}" style="color:white">Tambah</a>
-                            </button>
-                        </div> --}}
+                        @if (Auth::user()->tipe_pengguna == 'Admin' || Auth::user()->tipe_pengguna == 'Super_Admin')
+                            <div class="box-header">
+                                <button type="button" class="btn btn-success">
+                                    <a href="{{ route('penjualan.create') }}" style="color:white">Tambah</a>
+                                </button>
+                            </div>
+                        @endif
                         <a href="{{ url('print/penjualan') }}" style="margin-left:5px;">
                             <button class="btn btn-submit">Print Laporan</button>
                         </a>
                         <div class="box-body">
+                            <form action="" method="GET">
+                                <p>Filter Data</p>
+                                <input type="date" name="start_date" class="form-control"
+                                    style="min-width:100px;max-width:200px;width:100%;display:inline-block"
+                                    placeholder="Dimulai dari tanggal" required>
+                                <input type="date" name="end_date" class="form-control"
+                                    style="min-width:100px;max-width:200px;width:100%;display:inline-block"
+                                    placeholder="Hingga Tanggal" required>
+                                <button class="btn btn-primary" style="position:relative;top:-2px"><i
+                                        class="fa fa-search"></i></button>
+                            </form>
+                            <br />
                             <table id="table_penjualan" class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -61,6 +75,10 @@
                                                             <li>
                                                                 <a
                                                                     href="{{ route('penjualan.edit', ['penjualan' => $penjualan->id]) }}">Edit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a
+                                                                    href="{{ url('printeachoneselling', ['id' => $penjualan->id]) }}">Print</a>
                                                             </li>
                                                             {{-- <li>
                                                                 <a

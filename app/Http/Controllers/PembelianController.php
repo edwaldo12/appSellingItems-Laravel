@@ -18,9 +18,11 @@ class PembelianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pembelian = Pembelian::all();
+        $tanggal_awal = $request->query('start_date', '1970-01-01 00:00:00');
+        $tanggal_akhir = $request->query('end_date', date('Y-m-d H:i:s'));
+        $pembelian = Pembelian::whereBetween('created_at', [$tanggal_awal . " 00:00:00", $tanggal_akhir . " 23:59:59"])->get();
         return view('pembelian.index', compact('pembelian'));
     }
 
@@ -152,5 +154,11 @@ class PembelianController extends Controller
         $pembelian = pembelian::all();
         return view('pembelian.print', compact('pembelian'));
         // return PDF::loadView("pembelian.print", compact('pembelian'))->download("Laporan Pembelian " . date('YmdHis') . ".pdf");
+    }
+
+    public function printEachOne($id)
+    {
+        $pembelian = Pembelian::find($id);
+        return view('pembelian.printeachone', compact('pembelian'));
     }
 }

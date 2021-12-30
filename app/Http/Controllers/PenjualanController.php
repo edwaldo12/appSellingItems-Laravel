@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Detail_Penjualan;
 use App\Models\Penjualan;
 use App\Models\Supplier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -18,9 +19,11 @@ class PenjualanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penjualan = Penjualan::all();
+        $tanggal_awal = $request->query('start_date', '1970-01-01 00:00:00');
+        $tanggal_akhir = $request->query('end_date', date('Y-m-d H:i:s'));
+        $penjualan = Penjualan::whereBetween('created_at', [$tanggal_awal . " 00:00:00", $tanggal_akhir . " 23:59:59"])->get();
         return view('penjualan.index', compact('penjualan'));
     }
 
@@ -145,5 +148,11 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::all();
         return view('penjualan.print', compact('penjualan'));
         // return PDF::loadView("penjualan.print", compact('penjualan'))->download("Laporan Penjualan " . date('YmdHis') . ".pdf");
+    }
+
+    public function printEachOneSelling($id)
+    {
+        $penjualan = Penjualan::find($id);
+        return view('penjualan.printeachoneselling', compact('penjualan'));
     }
 }

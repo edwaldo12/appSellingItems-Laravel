@@ -150,19 +150,19 @@
 
             if (cari != undefined) {
                 let index = pembelianOrder.indexOf(cari);
-                let harga = $("#barang option:selected").data('harga');
+                let harga_beli = $("#barang option:selected").data('harga');
                 let jumlah_pesanan = $("#jumlah_pesanan").val();
                 pembelianOrder[index].jumlah_pesanan += parseInt($("#jumlah_pesanan").val());
-                pembelianOrder[index].subtotal += jumlah_pesanan * harga;
+                pembelianOrder[index].subtotal += jumlah_pesanan * harga_beli;
             } else {
                 let jumlah_pesanan = parseInt($("#jumlah_pesanan").val());
-                let harga = $("#barang option:selected").data('harga');
+                let harga_beli = $("#barang option:selected").data('harga');
                 let order = {
                     id_barang: id_barang,
                     nama_barang: $("#barang option:selected").text().trim(),
-                    harga_barang: harga,
+                    harga_barang: harga_beli,
                     jumlah_pesanan: jumlah_pesanan,
-                    subtotal: jumlah_pesanan * harga
+                    subtotal: jumlah_pesanan * harga_beli
                 };
                 console.log(order);
                 pembelianOrder.push(order);

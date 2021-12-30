@@ -19,11 +19,13 @@
                         <div class="box-header">
                             <h4 class="box-title">Data Barang</h4>
                         </div>
-                        {{-- <div class="box-header">
-                            <button type="button" class="btn btn-success">
-                                <a href="{{ route('barang.create') }}" style="color:white">Tambah</a>
-                            </button>
-                        </div> --}}
+                        @if (Auth::user()->tipe_pengguna == 'Admin' || Auth::user()->tipe_pengguna == 'Super_Admin')
+                            <div class="box-header">
+                                <button type="button" class="btn btn-success">
+                                    <a href="{{ route('barang.create') }}" style="color:white">Tambah</a>
+                                </button>
+                            </div>
+                        @endif
                         <a href="{{ url('print/barang') }}" style="margin-left:5px;">
                             <button class="btn btn-submit">Print Laporan</button>
                         </a>

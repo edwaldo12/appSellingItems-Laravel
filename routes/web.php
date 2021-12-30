@@ -39,4 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get("print/penjualan", [PenjualanController::class, "print"]);
 
     Route::get('/checkStok/{id}', [PembelianController::class, 'checkStok']);
+    Route::get("/printeachone/{id}", [PembelianController::class, "printEachOne"]);
+    Route::get("/printeachoneselling/{id}", [PenjualanController::class, "printEachOneSelling"]);
 });

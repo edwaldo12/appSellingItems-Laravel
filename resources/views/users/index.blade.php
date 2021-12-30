@@ -20,11 +20,13 @@
                         <div class="box-header">
                             <h4 class="box-title">Data Pengguna</h4>
                         </div>
-                        {{-- <div class="box-header">
-                            <button type="button" class="btn btn-success">
-                                <a href="{{ route('users.create') }}" style="color:white">Tambah</a>
-                            </button>
-                        </div> --}}
+                        @if (Auth::user()->tipe_pengguna == 'Admin' || Auth::user()->tipe_pengguna == 'Super_Admin')
+                            <div class="box-header">
+                                <button type="button" class="btn btn-success">
+                                    <a href="{{ route('users.create') }}" style="color:white">Tambah</a>
+                                </button>
+                            </div>
+                        @endif
                         <div class="box-body">
                             <table id="table_pengguna" class="table table-bordered compact">
                                 <thead>
